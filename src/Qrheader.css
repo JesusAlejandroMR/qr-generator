@@ -1,0 +1,22 @@
+.fromQr {
+    background-color: rgba(12, 61, 61, 0.904);    
+  }
+.fromQr h1{
+    text-align: center;
+    color:aliceblue;
+  }
+.inputHead{
+    border-radius: 40px;
+    color: rgb(3, 54, 29);
+    text-align: center;
+    width: 600px;
+    height: 30px;
+}
+.btnHead{
+    background-color: rgb(1, 46, 29);
+    border-color: azure;
+    color:aliceblue;
+    border-radius: 50px;
+    width: 70px;
+    height: 40px;
+}
