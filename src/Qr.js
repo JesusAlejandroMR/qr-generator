@@ -1,33 +1,59 @@
 import React from 'react';
 import { QRLine } from 'react-qrbtf';
-import {Qrheader} from './Qrheader';
+import { Qrheader } from './Qrheader';
+import './index.css';
 
+function Qr() {
+  const [patito, setPatito] = React.useState(' ');
+  const svgQrRef = React.useRef(null);
+  const [zoomLevel, setZoomLevel] = React.useState(100);
 
-function Qr() {   
-    const [patito, setPatito] = React.useState(' ');
+  React.useEffect(() => {
+    if (svgQrRef.current) {
+      const zoomTarget = svgQrRef.current;
+      zoomTarget.style.zoom = `${zoomLevel}%`;
+    }
+  }, [zoomLevel]);
 
-        return (
-            <React.Fragment>
-            <Qrheader
-                patito={patito}
-                setPatito={setPatito} 
-            />
-            <QRLine
-                value={patito}
-                className="AsyQrCode"
-                level="H"
-                funcType = "B"
-                styles={{ svg: {width: "600px"} }}
-                type="round"
-                direction="h-v"
-                size={50}
-                opacity={80}
-                posType="rect"
-                otherColor="#000000"
-                posColor="#000000"
-            />            
-            </React.Fragment>
-        )
+  const zoomInButton = () => {
+    setZoomLevel(prevZoom => prevZoom + 10);
+  };
+
+  const zoomOutButton = () => {
+    setZoomLevel(prevZoom => prevZoom - 10);
+  };
+
+  return (
+    <>
+      <Qrheader patito={patito} setPatito={setPatito} />
+      <div className='svgQr' ref={svgQrRef}>
+        <QRLine
+          value={patito}
+          qrcode=''
+          level='M'
+          className='AsyQrCode'
+          styles={{ svg: { width: '800px' } }}
+          funcType='A'
+          posType='roundRect'
+          posColor='#000000'
+          direction='h-v'
+          lineWidth='50'
+          lineOpacity='100'
+          lineColor='#000000'
+          icon=''
+          iconScale={'50'}
+        />
+      </div>
+      <div className='zoom-bar'>
+        <button className='zoom-in' onClick={zoomInButton}>
+          +
+        </button>
+        <button className='zoom-out' onClick={zoomOutButton}>
+          -
+        </button>
+      </div>
+    </>
+  );
 }
 
 export default Qr;
