@@ -6,7 +6,7 @@ import './index.css';
 function Qr() {           
     const [patito, setPatito] = React.useState(' ');
     const svgQrRef = React.useRef(null);
-    const [zoomLevel, setZoomLevel] = React.useState(100);
+    const [zoomLevel, setZoomLevel] = React.useState(50);
   
     React.useEffect(() => {
       if (svgQrRef.current) {
