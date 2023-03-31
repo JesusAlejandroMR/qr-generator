@@ -27,7 +27,11 @@
     text-align: center;    
 }
 
-
+.botonera{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
 
 .btnHead{  
     background-color: rgb(1, 46, 29);

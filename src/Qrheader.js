@@ -26,33 +26,34 @@ function Qrheader({ patito, setPatito }) {
   
     /* Descarga el SVG */
   const DownloadQRSvg = () => {
-    const svgElement = document.getElementById("svgQr"); // reemplaza "mi-svg" con el ID de tu etiqueta SVG
-    console.log(svgElement);
+    const svgElement = document.getElementById("svgQr");
+    svgElement.style.zoom = '100%';
     const svgData = new XMLSerializer().serializeToString(svgElement);
     const blob = new Blob([svgData], { type: "image/svg+xml" });
   
     const enlaceDescarga = document.createElement("a");
     enlaceDescarga.href = URL.createObjectURL(blob);
-    enlaceDescarga.download = "mi-svg.svg"; // nombre del archivo a descargar
+    enlaceDescarga.download = "qr.svg";
     document.body.appendChild(enlaceDescarga);
     enlaceDescarga.click();
     document.body.removeChild(enlaceDescarga);
+    svgElement.style.zoom = '50%';
   };  
 
   const DownloadQRPng = () => {
     const svgElement = document.getElementById("svgQr");
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-    
+    svgElement.style.zoom = '100%';    
     toPng(svgElement)
       .then(function (dataUrl) {
         const link = document.createElement('a');
-        link.download = 'mi-imagen.png';
+        link.download = 'qr.png';
         link.href = dataUrl;
         link.click();
+        svgElement.style.zoom = '50%';
       })
       .catch(function (error) {
         console.error('Error al generar la imagen:', error);
-      });
+      });      
   }
 
 
@@ -62,9 +63,11 @@ function Qrheader({ patito, setPatito }) {
       <header className="formQr-header">  
         <h1> Generador  de códigos Qr </h1>                   
         <input className="inputHead" placeholder="Ingrese su texto aquí" onChange={onValueQrChange}></input>
-        <button className="btnHead" onClick={GenerarQR}>Generar</button>
-        <button className="btnHead" onClick={DownloadQRSvg}>SVG</button>
-        <button className="btnHead" onClick={DownloadQRPng}>PNG</button>
+        <div className="botonera">
+          <button className="btnHead" onClick={GenerarQR}>Generar</button>
+          <button className="btnHead" onClick={DownloadQRSvg}>SVG</button>
+          <button className="btnHead" onClick={DownloadQRPng}>PNG</button>
+        </div>
         {/*
           <Qrlevel>
           {levelQr.map(lev =>(
