@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './Qrheader.css';
 import { toPng } from 'html-to-image';
 import {Qrlevel} from './Qrlevel';
@@ -11,19 +11,38 @@ const levelQr = [
   {level:"VH",description:"Very High"}
 ]
 
-function Qrheader({ patito, setPatito }) {
-  
-  let valorQr= ' ';
+function Qrheader({ patito, setPatito, imagen, setImagen }) {  
+  /*Uso del checkbox*/
+  const [isChecked, setIsChecked] = useState(false);  
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);    
+    var dataImg = document.getElementById("file");
+    if (!isChecked === true) {      
+      dataImg.style.display = 'flex'; 
+    }else{
+      dataImg.style.display = 'none'; 
+      setImagen(null);
+    }
+  };    
+  /*Selecciona la img*/
+  let valorImg = '';   
 
+  const get_image_path = (event) => {    
+    const file = event.target.files[0];    
+    const imageUrl = URL.createObjectURL(file);
+    setImagen(imageUrl);
+  }
+
+   
   /*Detecta cada cambio den el textbox*/
+  let valorQr = ' '; 
   const onValueQrChange = (event) => {     
     valorQr = (event.target.value);    
   }
-  /*guarda el valor en el estado setPatito*/
+    /*guarda el valor en el estado setPatito*/
   const GenerarQR=() => {    
-    setPatito(valorQr);    
-  };
-  
+    setPatito(valorQr);
+  };  
     /* Descarga el SVG */
   const DownloadQRSvg = () => {
     const svgElement = document.getElementById("svgQr");
@@ -39,7 +58,7 @@ function Qrheader({ patito, setPatito }) {
     document.body.removeChild(enlaceDescarga);
     svgElement.style.zoom = '50%';
   };  
-
+    /* Descarga el PNG */
   const DownloadQRPng = () => {
     const svgElement = document.getElementById("svgQr");
     svgElement.style.zoom = '100%';    
@@ -62,7 +81,11 @@ function Qrheader({ patito, setPatito }) {
     <div className="fromQr">
       <header className="formQr-header">  
         <h1> Generador  de códigos Qr </h1>                   
-        <input className="inputHead" placeholder="Ingrese su texto aquí" onChange={onValueQrChange}></input>
+        <input className="inputHead" placeholder="Ingrese su texto aquí" onChange={onValueQrChange}/>
+        <div className="botoneraImg">
+          <input type="checkbox" className="chbImg" name="chbImg" checked={isChecked} onChange={handleOnChange}/>Añadir Img        
+          <input className="btnIconHead" type="file" accept="image/*" id="file" onClick={get_image_path} onChange={get_image_path}/>
+        </div>
         <div className="botonera">
           <button className="btnHead" onClick={GenerarQR}>Generar</button>
           <button className="btnHead" onClick={DownloadQRSvg}>SVG</button>

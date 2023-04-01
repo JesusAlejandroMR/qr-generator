@@ -33,6 +33,30 @@
     margin-top: 12px;
 }
 
+.botoneraImg{
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.botoneraImg input{
+  margin-left: 10px;
+  margin-right: 10px;  
+}
+
+.btnIconHead{
+  background-color: rgb(1, 46, 29);
+  border-color: azure;
+  color:aliceblue;
+  border-radius: 15px;  
+  height: 40px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 10px; 
+  display:none;
+}
+
 .btnHead{  
     background-color: rgb(1, 46, 29);
     border-color: azure;

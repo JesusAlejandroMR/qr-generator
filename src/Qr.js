@@ -5,6 +5,7 @@ import './index.css';
 
 function Qr() {           
     const [patito, setPatito] = React.useState(' ');
+    const [imagen, setImagen] = React.useState(null);
     const svgQrRef = React.useRef(null);
     const [zoomLevel, setZoomLevel] = React.useState(50);
   
@@ -17,6 +18,7 @@ function Qr() {
   
     const zoomInButton = () => {
       setZoomLevel(prevZoom => prevZoom + 10);
+      console.log({imagen});
     };
   
     const zoomOutButton = () => {
@@ -28,6 +30,8 @@ function Qr() {
             <Qrheader
                 patito={patito}
                 setPatito={setPatito} 
+                imagen = {imagen}
+                setImagen = {setImagen}
             />
             <div id="svgQr" ref={svgQrRef}>
                 <QRLine
@@ -43,7 +47,7 @@ function Qr() {
                     lineWidth = "50"
                     lineOpacity = "100"
                     lineColor = "#000000"
-                    icon=""
+                    icon={imagen}
                     iconScale={"50"}
                 />            
             </div>
