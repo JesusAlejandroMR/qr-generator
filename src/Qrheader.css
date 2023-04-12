@@ -37,6 +37,8 @@
   display: flex;
   justify-content: center;
   margin-top: 12px;
+  color: white;
+  font-weight: bold;
 }
 
 .botoneraImg input{
