@@ -42,6 +42,8 @@ function Qrheader({ patito, setPatito, imagen, setImagen }) {
     /*guarda el valor en el estado setPatito*/
   const GenerarQR=() => {    
     setPatito(valorQr);
+    var objInput = document.getElementById("inputHead");
+    objInput.value = ''; // Cambio a value en lugar de val
   };  
     /* Descarga el SVG */
   const DownloadQRSvg = () => {
@@ -81,7 +83,7 @@ function Qrheader({ patito, setPatito, imagen, setImagen }) {
     <div className="fromQr">
       <header className="formQr-header">  
         <h1> Generador  de códigos Qr </h1>                   
-        <input className="inputHead" placeholder="Ingrese su texto aquí" onChange={onValueQrChange}/>
+        <input className="inputHead" id="inputHead" placeholder="Ingrese su texto aquí" onChange={onValueQrChange}/>
         <div className="botoneraImg">
           <input type="checkbox" className="chbImg" name="chbImg" checked={isChecked} onChange={handleOnChange}/>Añadir Img        
           <input className="btnIconHead" type="file" accept="image/*" id="file" onClick={get_image_path} onChange={get_image_path}/>
